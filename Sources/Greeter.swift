@@ -1,6 +1,6 @@
 
 func sayHello(person: Person) {
-    print("¡Hola, \(person.name), tienes \(person.age) años!")
+    print("¡Hola, \(applyColor(person.name, Colors.Red)), tienes \(applyColor((String(person.age)), Colors.Cyan)) años!")
 }
 
 class Person {
