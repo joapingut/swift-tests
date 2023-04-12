@@ -18,9 +18,9 @@ if (CommandLine.arguments.count == 4) {
     assertCommand("test", CommandLine.arguments[1])
 
     print("Texto de ejemplo");
-    print(ChainedDecorator("Texto de ejemplo color rojo").color(color: Colors.Red).toString());
-    print(ChainedDecorator("Texto de ejemplo color rojo, fondo amarillo").color(color: Colors.Red).background(color: Colors.Yellow).toString());
-    print(ChainedDecorator("Texto de ejemplo color rojo, fondo amarillo, subrallado").color(color: Colors.Red).background(color: Colors.Yellow).modifier(modifier: Modifiers.Underline).toString());
+    print(TextDecorator("Texto de ejemplo color rojo").color(color: Colors.Red).toString());
+    print(TextDecorator("Texto de ejemplo color rojo, fondo amarillo").color(color: Colors.Red).background(color: Colors.Yellow).toString());
+    print(TextDecorator("Texto de ejemplo color rojo, fondo amarillo, subrallado").color(color: Colors.Red).background(color: Colors.Yellow).modifier(modifier: Modifiers.Underline).toString());
 } else {
     printUsage()
 }

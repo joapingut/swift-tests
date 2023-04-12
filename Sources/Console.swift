@@ -43,48 +43,38 @@ protocol Decorable {
     func modifier(modifier : Modifiers) -> Decorable
     func toString() -> String
 }
-class ChainedDecorator : Decorable {
-    let inner : Decorable?
-    let text : String?
+class TextDecorator : Decorable {
+    let text : String
     var color : Colors?
-    var background : Bool = false
+    var background : Colors?
     var modifier : Modifiers?
 
-    init (_ inner : Decorable) {
-        self.inner = inner
-        self.text = nil
-    }
-
     init (_ text : String) {
-        self.inner = nil
         self.text = text
     }
     
     func color(color : Colors) -> Decorable {
         self.color = color
-        return ChainedDecorator(self)
+        return self
     }
 
     func background(color : Colors) -> Decorable {
-        self.color = color
-        self.background = true
-        return ChainedDecorator(self)
+        self.background = color
+        return self
     }
 
     func modifier(modifier : Modifiers) -> Decorable {
         self.modifier = modifier
-        return ChainedDecorator(self)
+        return self
     }
 
     func toString() -> String {
-        var output : String
-        if (inner != nil) {
-            output = inner!.toString()
-        } else {
-            output = "\(text!)\u{001b}[\(Colors.Default.rawValue)m"
-        }
+        var output = "\(text)\u{001b}[\(Colors.Default.rawValue)m"
         if (color != nil) {
-            output = "\u{001b}[\(background ? color!.rawValue + backgroundOffset : color!.rawValue)m\(output)"
+            output = "\u{001b}[\(color!.rawValue)m\(output)"
+        }
+        if (background != nil) {
+            output = "\u{001b}[\(background!.rawValue + backgroundOffset)m\(output)"
         }
         if (modifier != nil) {
             output = "\u{001b}[\(modifier!.rawValue)m\(output)"
